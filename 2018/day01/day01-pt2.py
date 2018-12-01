@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
-from typing import List, IO
+from typing import List, Set, IO
 
 
 class Input:
@@ -23,7 +23,7 @@ class Frequency:
     @property
     def result(self) -> int:
         frequency: int = 0
-        freq_record: List[int] = []
+        freq_record: Set[int] = set()
 
         while True:
             for adjustment in self._data:
@@ -37,7 +37,7 @@ class Frequency:
                 if frequency in freq_record:
                     return frequency
                 else:
-                    freq_record.append(frequency)
+                    freq_record.add(frequency)
 
 
 if __name__ == "__main__":
