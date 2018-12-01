@@ -6,14 +6,10 @@ from typing import List, Set, IO
 
 class Input:
     def __init__(self, path: IO[str]):
-        self._data = []
+        self.data = []
         with open(path, 'r') as fp:
             for line in fp:
-                self._data.append(line)
-
-    @property
-    def input(self) -> List[str]:
-        return self._data
+                self.data.append(line)
 
 
 class Frequency:
@@ -28,11 +24,7 @@ class Frequency:
         while True:
             for adjustment in self._data:
                 adjustment = adjustment.replace('\n', '')
-
-                if adjustment.startswith('+'):
-                    frequency += int(adjustment[1:])
-                else:
-                    frequency -= int(adjustment[1:])
+                frequency += int(adjustment)
 
                 if frequency in freq_record:
                     return frequency
@@ -48,7 +40,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     file = Input(args.source)
-    frequency = Frequency(file.input)
+    frequency = Frequency(file.data)
 
     # This might take a while.
     print(f'The first duplicate frequency is {frequency.result}.')

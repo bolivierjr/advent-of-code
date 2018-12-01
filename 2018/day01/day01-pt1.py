@@ -6,14 +6,10 @@ from typing import List, IO
 
 class Input:
     def __init__(self, path: IO[str]):
-        self._data = []
+        self.data = []
         with open(path, 'r') as fp:
             for line in fp:
-                self._data.append(line)
-
-    @property
-    def input(self) -> List[str]:
-        return self._data
+                self.data.append(line)
 
 
 class Frequency:
@@ -24,13 +20,9 @@ class Frequency:
     def result(self) -> int:
         frequency: int = 0
 
-        for item in self._data:
-            item = item.replace('\n', '')
-
-            if item.startswith('+'):
-                frequency += int(item[1:])
-            else:
-                frequency -= int(item[1:])
+        for adjustment in self._data:
+            adjustment = adjustment.replace('\n', '')
+            frequency += int(adjustment)
 
         return frequency
 
@@ -43,6 +35,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     file = Input(args.source)
-    frequency = Frequency(file.input)
+    frequency = Frequency(file.data)
 
     print(f'The end frequency is {frequency.result}.')
