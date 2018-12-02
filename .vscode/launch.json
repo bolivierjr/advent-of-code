@@ -1,0 +1,59 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Current File (Integrated Terminal)",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "args": [
+        "--source",
+        "E:\\projects\\advent-of-code\\2018\\day02\\input.txt"
+      ],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Python: Attach",
+      "type": "python",
+      "request": "attach",
+      "port": 5678,
+      "host": "localhost"
+    },
+    {
+      "name": "Python: Module",
+      "type": "python",
+      "request": "launch",
+      "module": "enter-your-module-name-here",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Python: Django",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "console": "integratedTerminal",
+      "args": ["runserver", "--noreload", "--nothreading"]
+    },
+    {
+      "name": "Python: Flask",
+      "type": "python",
+      "request": "launch",
+      "module": "flask",
+      "env": {
+        "FLASK_APP": "app.py"
+      },
+      "args": ["run", "--no-debugger", "--no-reload"]
+    },
+    {
+      "name": "Python: Current File (External Terminal)",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "args": [
+        "--source",
+        "E:\\projects\\advent-of-code\\2018\\day01\\input.txt"
+      ],
+      "console": "externalTerminal"
+    }
+  ]
+}
