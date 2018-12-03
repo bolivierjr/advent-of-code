@@ -1,5 +1,4 @@
 import os
-import sys
 
 directory = os.path.dirname(os.path.abspath(__file__))
 filename = os.path.join(directory, 'input.txt')
