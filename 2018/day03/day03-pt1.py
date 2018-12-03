@@ -29,7 +29,10 @@ def get_data() -> List[Dict[str, str]]:
 
 if __name__ == '__main__':
     data = get_data()
-    fabric = deque()
+    fabrics = deque([[], []])
 
     for specs in data:
-        pass
+        for iter, x in enumerate(range(0, int(specs['left']))):
+            if iter > len(fabrics[0]) - 1:
+                fabrics[0].append(None)
+    print(fabrics)
