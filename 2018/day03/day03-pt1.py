@@ -26,18 +26,18 @@ def get_data() -> List[Dict[str, int]]:
 
 
 if __name__ == '__main__':
-    data = get_data()
-    fabric_coords = deque()
+    data: List[Dict[str, int]] = get_data()
+    fabric_coords: Deque[tuple] = deque()
 
     for specs in data:
         for x in range(specs['width']):
             pass
 
             for y in range(specs['height']):
-                x_coord = specs['left'] + x
-                y_coord = -specs['top'] + -y
+                x_coord: int = specs['left'] + x
+                y_coord: int = -specs['top'] + -y
                 fabric_coords.append((x_coord, y_coord))
 
-    overlap = len([x for x in Counter(fabric_coords).values() if x > 1])
+    overlap: int = len([x for x in Counter(fabric_coords).values() if x > 1])
 
     print(f'Overlap: {overlap}')
