@@ -31,8 +31,6 @@ if __name__ == '__main__':
 
     for specs in data:
         for x in range(specs['width']):
-            pass
-
             for y in range(specs['height']):
                 x_coord: int = specs['left'] + x
                 y_coord: int = -specs['top'] + -y
