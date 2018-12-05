@@ -35,7 +35,7 @@ def find_most_sleepy(data: List[str]) -> Tuple[str, int]:
             sleep += int(minute)
         elif guards and 'wakes' in description:
             sleep = int(minute) - sleep
-            guards[guard_queue] = sleep
+            guards[guard_queue] += sleep
             sleep = 0
     print(guards)
     return max(guards.items())

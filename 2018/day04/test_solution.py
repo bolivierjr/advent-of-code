@@ -1,8 +1,8 @@
-from .solution1 import find_most_sleepy
+from .solution import find_most_sleepy
 
 
 def test_find_most_sleepy():
-    testdata = [
+    tdata = [
         '[1518-11-01 00:00] Guard  #10 begins shift\n',
         '[1518-11-01 00:05] falls asleep\n',
         '[1518-11-01 00:25] wakes up\n',
@@ -21,5 +21,5 @@ def test_find_most_sleepy():
         '[1518-11-05 00:45] falls asleep\n',
         '[1518-11-05 00:55] wakes up\n'
     ]
-    
-    assert find_most_sleepy(testdata) == ('#10', 24)
+
+    assert find_most_sleepy(tdata) == ('#10', 24)
