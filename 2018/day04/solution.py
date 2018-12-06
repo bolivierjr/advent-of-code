@@ -1,6 +1,6 @@
 import os
 from typing import Dict, List, Tuple
-from collections import Counter
+from collections import Counter, deque
 
 
 directory: str = os.path.dirname(os.path.abspath(__file__))
@@ -11,13 +11,16 @@ with open(filename, 'r') as fp:
 
 
 def find_most_sleepy(guards: dict) -> Tuple[str, int]:
-    nodders = set()
+    nodders = {}
 
-    for guard in guards:
-        total_asleep = sum(guards[guard].values())
-        nodders.add((guard, total_asleep))
+    for guard, minutes in guards.items():
+        total_asleep = sum(Counter(minutes).values())
+        nodders.update({guard: total_asleep})
 
-    return max(nodders)
+    _, most_sleepy = max(zip(nodders.values(), nodders.keys()))
+    most_common_min = Counter(guards[most_sleepy]).most_common(1)[0][0]
+
+    return most_sleepy, most_common_min
 
 
 def get_sleepy_heads(logs: List[str]) -> Tuple[str, int]:
@@ -38,24 +41,24 @@ def get_sleepy_heads(logs: List[str]) -> Tuple[str, int]:
 
             if queue:
                 queue.pop()
-
             queue.append(guard)
 
         elif guards and 'falls' in description:
             sleep += int(minute)
 
         elif guards and 'wakes' in description:
-            awake = int(minute) - sleep
+            awake = int(minute)
 
-            for number in range(sleep, awake + 1):
-                guards[queue[0]].update(str(number))
+            for number in range(sleep, awake):
+                guards[queue[0]].update({number: 1})
 
-            sleep = 0, 0
+            sleep, awake = 0, 0
 
-    sleeping_beauty = find_most_sleepy(guards)
+    sleeping_beauty, common_min = find_most_sleepy(guards)
+    result = int(sleeping_beauty.lstrip('#')) * common_min
 
-    return sleeping_beauty
+    return result
 
 
 if __name__ == '__main__':
-    get_sleepy_heads(data)
+    print(f'The result is {get_sleepy_heads(data)}!')

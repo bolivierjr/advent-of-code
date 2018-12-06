@@ -22,4 +22,4 @@ def test_get_sleepy_heads():
         '[1518-11-05 00:55] wakes up\n'
     ]
 
-    assert get_sleepy_heads(tdata) == ('#10', 30)
+    assert get_sleepy_heads(tdata) == 240
