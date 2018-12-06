@@ -1,5 +1,6 @@
 import os
-from typing import List, Tuple
+from typing import Dict, List, Tuple
+from collections import Counter
 
 
 directory: str = os.path.dirname(os.path.abspath(__file__))
@@ -9,7 +10,17 @@ with open(filename, 'r') as fp:
     data: List[str] = sorted(fp.read().splitlines())
 
 
-def find_most_sleepy(logs: List[str]) -> Tuple[str, int]:
+def find_most_sleepy(guards: dict) -> Tuple[str, int]:
+    nodders = set()
+
+    for guard in guards:
+        total_asleep = sum(guards[guard].values())
+        nodders.add((guard, total_asleep))
+
+    return max(nodders)
+
+
+def get_sleepy_heads(logs: List[str]) -> Tuple[str, int]:
     queue = []
     guards = {}
     sleep = 0
@@ -18,13 +29,12 @@ def find_most_sleepy(logs: List[str]) -> Tuple[str, int]:
         raw_datetime, description = log.split(']')
         _, time = raw_datetime.split()
         _, minute = time.split(':')
-        guard_queue = queue[0]
 
         if 'Guard' in description:
             _, guard, _, _ = description.split()
 
             if guard not in guards:
-                guards[guard] = []
+                guards[guard] = Counter()
 
             if queue:
                 queue.pop()
@@ -36,15 +46,16 @@ def find_most_sleepy(logs: List[str]) -> Tuple[str, int]:
 
         elif guards and 'wakes' in description:
             awake = int(minute) - sleep
-            for x in range(sleep, awake + 1):
-                pass
 
-            guards[guard_queue] += sleep
-            sleep, awake = 0, 0
-    print(guards)
-    return max(guards.items())
+            for number in range(sleep, awake + 1):
+                guards[queue[0]].update(str(number))
+
+            sleep = 0, 0
+
+    sleeping_beauty = find_most_sleepy(guards)
+
+    return sleeping_beauty
 
 
 if __name__ == '__main__':
-    find_most_sleepy(data)
-    print(data)
+    get_sleepy_heads(data)

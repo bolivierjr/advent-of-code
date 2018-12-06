@@ -1,4 +1,5 @@
 venv/
 .vscode/
-*cache*
+*.pyc
+.pytest_cache/
 day03-pt2.py

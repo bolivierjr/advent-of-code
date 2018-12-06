@@ -1,7 +1,7 @@
-from .solution import find_most_sleepy
+from .solution import get_sleepy_heads
 
 
-def test_find_most_sleepy():
+def test_get_sleepy_heads():
     tdata = [
         '[1518-11-01 00:00] Guard  #10 begins shift\n',
         '[1518-11-01 00:05] falls asleep\n',
@@ -22,4 +22,4 @@ def test_find_most_sleepy():
         '[1518-11-05 00:55] wakes up\n'
     ]
 
-    assert find_most_sleepy(tdata) == ('#10', 24)
+    assert get_sleepy_heads(tdata) == ('#10', 30)
