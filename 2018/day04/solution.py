@@ -11,16 +11,22 @@ with open(filename, 'r') as fp:
 
 
 def find_most_sleepy(guards: dict) -> Tuple[str, int]:
-    nodders = {}
+    nodders1 = {}
+    nodders2 = {}
 
     for guard, minutes in guards.items():
         total_asleep = sum(Counter(minutes).values())
-        nodders.update({guard: total_asleep})
+        nodders1.update({guard: total_asleep})
 
-    _, most_sleepy = max(zip(nodders.values(), nodders.keys()))
-    most_common_min = Counter(guards[most_sleepy]).most_common(1)[0][0]
+        # most_common_min2, _ = Counter(minutes).most_common(1)[0]
+        # nodders2.update({guard: most_common_min2})
 
-    return most_sleepy, most_common_min
+    # _, most_sleepy = max(zip(nodders1.values(), nodders1.keys()))
+    # most_common_min = Counter(guards[most_sleepy]).most_common(1)[0][0]
+
+    # most_sleepy2 = max(zip(nodders2.keys(), nodders2.values()))
+
+    # return most_sleepy, most_common_min, most_sleepy2
 
 
 def get_sleepy_heads(logs: List[str]) -> Tuple[str, int]:
@@ -54,11 +60,17 @@ def get_sleepy_heads(logs: List[str]) -> Tuple[str, int]:
 
             sleep, awake = 0, 0
 
-    sleeping_beauty, common_min = find_most_sleepy(guards)
-    result = int(sleeping_beauty.lstrip('#')) * common_min
+    # sleeping_beauty, common_min, most_sleepiest = find_most_sleepy(guards)
+    # result = int(sleeping_beauty.lstrip('#')) * common_min
 
-    return result
+    # sleepybeauty2, common_min2 = most_sleepiest
+    # result2 = int(sleepybeauty2.lstrip('#')) * common_min2
+
+    # return result, result2
 
 
 if __name__ == '__main__':
-    print(f'The result is {get_sleepy_heads(data)}!')
+    pass
+    result, result2 = get_sleepy_heads(data)
+    print(f'Solution1: {result}')
+    print(f'Solution 2: {result2}')
