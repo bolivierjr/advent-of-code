@@ -11,7 +11,7 @@ def reactors(polymers: str) -> str:
 
     while not_found:
         reactive_poly = polymers
-        start = len(polymers)
+        start = len(reactive_poly)
 
         for item, polymer in enumerate(reactive_poly):
             lowercase_first = polymer.lower() + polymer.upper()
@@ -19,12 +19,11 @@ def reactors(polymers: str) -> str:
             polymers = polymers.replace(
                 lowercase_first, '').replace(uppercase_first, '')
 
-            end = len(polymers)
+            end = len(reactive_poly)
             not_found = start != end
 
     return polymers
 
 
 if __name__ == '__main__':
-    tdata = 'dabAcCaCBAcCcaDA'
     print(f'Polymer count: {len(reactors(data))}')
