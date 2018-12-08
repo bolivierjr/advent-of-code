@@ -7,10 +7,6 @@ import (
 	"strings"
 )
 
-type Input struct {
-	path string
-}
-
 func getInput() []string {
 	filename, err := filepath.Abs("input.txt")
 	data, err := ioutil.ReadFile(filename)
@@ -37,7 +33,7 @@ func inMap(num int, array map[string]int) bool {
 
 func countChars(id string) map[string]int {
 	// countChars makes a map of the number of
-	// the same characters in each string
+	// the same like characters in each string
 	count := make(map[string]int)
 
 	for _, char := range id {
