@@ -1,5 +1,4 @@
 import os
-from functools import reduce
 from string import ascii_lowercase
 
 directory = os.path.dirname(os.path.abspath(__file__))
@@ -33,10 +32,7 @@ def reactors2(polymers: str) -> int:
             end = len(reactive_poly)
             not_found = start != end
 
-    shortest_length_poly = reduce(
-        (lambda x, y: x if x < y else y), polymer_lengths)
-
-    return shortest_length_poly
+    return min(polymer_lengths)
 
 
 if __name__ == '__main__':
