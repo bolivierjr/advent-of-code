@@ -1,6 +1,6 @@
-from .day05_pt1 import reactor
+from .day05_pt1 import reactors
 
 
 def test_reactor():
     polymer = 'dabAcCaCBAcCcaDA'
-    assert reactor(polymer) == 'dabCBAcaDA'
+    assert reactors(polymer) == 'dabCBAcaDA'
