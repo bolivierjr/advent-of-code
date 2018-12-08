@@ -24,8 +24,8 @@ def reactor(polymers: str) -> str:
                     reactive_poly.pop(item + 1)
                     reactive_poly.pop(item)
 
-        if len(reactive_poly) == len(polymers):
-            not_found = False
+        # if len(reactive_poly) == len(polymers):
+        not_found = start != len(reactive_poly)
 
         polymers.clear()
         polymers.extend(reactive_poly)
