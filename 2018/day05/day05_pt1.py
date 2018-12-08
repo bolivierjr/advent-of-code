@@ -7,12 +7,12 @@ with open(filename, 'r') as fp:
 
 
 def reactor(polymers: str) -> str:
-    polymers = list(polymers)
+    # polymers = list(polymers)
     not_found = True
 
     while not_found:
-        reactive_poly = []
-        reactive_poly.extend(polymers)
+        reactive_poly = ''
+        reactive_poly += polymers
         start = len(reactive_poly)
 
         for item, _ in enumerate(polymers):
@@ -21,17 +21,20 @@ def reactor(polymers: str) -> str:
 
             elif reactive_poly[item].lower() in reactive_poly[item + 1].lower():
                 if reactive_poly is not reactive_poly[item + 1]:
-                    reactive_poly.pop(item + 1)
-                    reactive_poly.pop(item)
+                    reactive_poly = reactive_poly[:item] + \
+                        reactive_poly[item + 1:]
+                    reactive_poly = reactive_poly[:item] + \
+                        reactive_poly[item + 1:]
 
         # if len(reactive_poly) == len(polymers):
         not_found = start != len(reactive_poly)
 
-        polymers.clear()
-        polymers.extend(reactive_poly)
+        polymers = ''
+        polymers += reactive_poly
 
     return ''.join(reactive_poly)
 
 
 if __name__ == '__main__':
+    tdata = 'dabAcCaCBAcCcaDA'
     print(f'Polymer count: {len(reactor(data))}')

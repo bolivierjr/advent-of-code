@@ -11,9 +11,8 @@ type Input struct {
 	path string
 }
 
-// Input struct Methods
-func (p *Input) getInput() []string {
-	filename, err := filepath.Abs(p.path)
+func getInput() []string {
+	filename, err := filepath.Abs("input.txt")
 	data, err := ioutil.ReadFile(filename)
 	if err != nil {
 		panic(err)
@@ -23,8 +22,6 @@ func (p *Input) getInput() []string {
 
 	return idArray
 }
-
-// Help functions
 
 func inMap(num int, array map[string]int) bool {
 	// inSlice checks to see if a value matches
@@ -58,8 +55,7 @@ func countChars(id string) map[string]int {
 
 // Main function
 func main() {
-	input := Input{path: "input.txt"}
-	data := input.getInput()
+	data := getInput()
 	twoCount := 0
 	threeCount := 0
 
