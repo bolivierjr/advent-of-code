@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 
-import argparse
+import os
 from typing import List, Set, IO
 
 
-class Input:
-    def __init__(self, path: IO[str]):
-        self.data = []
-        with open(path, 'r') as fp:
-            for line in fp:
-                self.data.append(line)
+directory = os.path.dirname(os.path.abspath(__file__))
+filename = os.path.join(directory, 'input.txt')
+
+with open(filename, 'r') as fp:
+    data = fp.read().split()
 
 
 class Frequency:
@@ -23,7 +22,6 @@ class Frequency:
 
         while True:
             for adjustment in self._data:
-                adjustment = adjustment.replace('\n', '')
                 frequency += int(adjustment)
 
                 if frequency in freq_record:
@@ -33,14 +31,5 @@ class Frequency:
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Get the result from an input'
-                                     'file for adventofcode puzzles')
-    parser.add_argument('-s', '--source', help='the path to the input file',
-                        required=True)
-    args = parser.parse_args()
-
-    file = Input(args.source)
-    frequency = Frequency(file.data)
-
-    # This might take a while.
+    frequency = Frequency(data)
     print(f'The first duplicate frequency is {frequency.result}.')
