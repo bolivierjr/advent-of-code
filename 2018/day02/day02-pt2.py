@@ -7,7 +7,7 @@ id_list2 = []
 
 with open(filename, 'r') as fp:
     for id_str in fp:
-        id_str = id_str.replace('\n', '')
+        id_str = id_str.rstrip('\n')
         id_list1.append(id_str)
         id_list2.append(id_str)
 
