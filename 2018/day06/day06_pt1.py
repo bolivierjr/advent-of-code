@@ -56,7 +56,7 @@ def map_closest_coords(coords: list, grid: list) -> Dict[tuple, tuple]:
                     point_distances, key=point_distances.get)
 
                 if coord_counts[minimum_dist_value] > 1:
-                    closest_coords[point] = None
+                    pass
                 else:
                     closest_coords[point] = minimum_dist_coord
 
@@ -70,12 +70,22 @@ def find_area(coords: List[tuple]) -> int:
     grid = make_grid(coords)
     closest_coords = map_closest_coords(coords, grid)
 
+    infinite_coords = set()
     min_x, min_y = coords[0]
     max_x, max_y = coords[-1]
+
     for point, point_owner in closest_coords.items():
-        pass
+        x_point, y_point = point
+        if x_point == min_x or x_point == max_x:
+            if y_point == min_y or y_point == max_y:
+                infinite_coords.add(point_owner)
+
+    count = Counter(closest_coords.values()).items()
+    finite_coords = {x: y for x, y in count if x not in infinite_coords}
+    largest_area = max(finite_coords.values())
+
+    return largest_area
 
 
 if __name__ == '__main__':
-    tdata = [(1, 1), (1, 6), (8, 3), (3, 4), (5, 5), (8, 9)]
-    print(f'The size of the largest area is {find_area(tdata)}')
+    print(f'The size of the largest area is {find_area(coords)}')
