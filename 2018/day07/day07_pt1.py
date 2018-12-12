@@ -1,9 +1,9 @@
+#####################
 # WIP: what a mess!
-#
-#
-
+#####################
 
 import os
+import re
 from typing import List
 from string import ascii_uppercase
 from collections import deque
@@ -14,21 +14,23 @@ with open(filename, 'r') as fp:
     instructions = fp.read()
 
 
-def get_order(instructions: List[str]) -> str:
-    instructions = instructions.split()
-    steps = []
-    char_list = []
-    for instruction in instructions:
-        if instruction in ascii_uppercase:
-            char_list.append(instruction)
+def get_order(instructions: str) -> str:
+    instructions = re.findall('[A-Z]\s', instructions)
+    steps = deque(''.join(instructions).split())
+    build_count = 0
+    sleigh = ''
 
-        if char_list and len(char_list) % 8 == 0:
-            if char_list[-4] in char_list[-2]:
-                sort_nextstep = sorted([char_list[-3], char_list[-1]])
-                steps.extend([char_list[0], sort_nextstep[0]])
-                char_list = [char_list[-1]]
-                char_list.extend(sort_list)
-                a = 1
+    while build_count < len(instructions):
+        if steps[0] in steps[2]:
+            sleigh += steps[0]
+            steps.remove(steps.popleft())
+            next_up = sorted([steps[0], steps[1]])
+
+            if next_up[0] not in steps[0]:
+                steps[0], steps[1] = steps[1], steps[0]
+
+        steps += steps.popleft()
+        build_count += 1
 
 
 if __name__ == '__main__':
