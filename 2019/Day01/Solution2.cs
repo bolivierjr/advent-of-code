@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Interfaces;
+using Serilog.Core;
 
 namespace Day01
 {
@@ -35,9 +36,8 @@ namespace Day01
             totalFuel += fuel + additionalFuel;
         }
 
-        public static void Run()
+        public static void Run(string filePath, Logger log)
         {
-            string filePath = Path.GetFullPath("Day01/input.txt");
             Solution2 solution = new Solution2();
 
             foreach(string line in File.ReadLines(filePath))
@@ -46,7 +46,7 @@ namespace Day01
                 solution.RequiredFuel(mass);
             }
 
-            Console.WriteLine($"Total fuel required: {solution.totalFuel}");
+            log.Information($"Total fuel required: {solution.totalFuel}");
         }
     }
 }
