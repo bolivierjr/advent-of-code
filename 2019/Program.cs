@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using Interfaces;
 
 namespace AdventOfCode2019
 {
@@ -28,11 +27,11 @@ namespace AdventOfCode2019
             }
             catch (NullReferenceException)
             {
-                Console.WriteLine("Cannot find that day and solution.");
+                Console.WriteLine("Cannot find that day and/or solution.");
             }
 
             stopwatch.Stop();
-            Console.WriteLine($"Time: {stopwatch.Elapsed}");
+            Console.WriteLine($"Time Completed: {stopwatch.Elapsed}");
         }
     }
 }

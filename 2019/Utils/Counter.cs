@@ -4,7 +4,7 @@ namespace Utils
 {
     public class Counter
     {
-        private static string Message;
+        private readonly string Message;
 
         public Counter(string message)
         {
