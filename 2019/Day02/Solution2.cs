@@ -7,53 +7,53 @@ namespace Day02
 {
     public class Solution2: ISolution
     {
-        public int NounAndVerbGenerator(int[] optcodes)
+        private const int target = 19690720;
+        private int nounVerb;
+        
+        public void NounAndVerbGenerator(int[] memory)
         {
-            int[] memory = (int[])optcodes.Clone();
-
-            for (int noun = 0; noun < 100; noun++)
+            for (int noun = 0; noun < 99; noun++)
             {
-                for (int verb = 0; verb < 100; verb++)
+                for (int verb = 0; verb < 99; verb++)
                 {
                     memory[1] = noun;
                     memory[2] = verb;
 
-                    this.OptcodeProcessor(memory);
+                    int[] processed = this.OptcodeProcessor(memory);
 
-                    if(memory[0] == 19690720)
+                    if(processed[0] == target)
                     {
-                        return 1;
+                        nounVerb = 100 * noun + verb;
                     }
                 }
             }
-
-            return 0;
         }
 
-        public void OptcodeProcessor(int[] optcodes)
+        public int[] OptcodeProcessor(int[] memory)
         {
+            var optcodes = new int[memory.Length];
+            Array.Copy(memory, optcodes, memory.Length);
 
             for (int index = 0; index < optcodes.Length; index += 4)
             {
-                if (optcodes[index] == 99)
-                {
-                    break;
-                }
+                if (optcodes[index] == 99) break;
                 
-                else if (optcodes[index] == 1)
+                if (optcodes[index] == 1)
                 {
-                    int sum = optcodes[index + 1] + optcodes[index + 2];
+                    int sum = optcodes[optcodes[index + 1]] + optcodes[optcodes[index + 2]];
                     // Change output position value
-                    optcodes[index + 3] = sum;
+                    optcodes[optcodes[index + 3]] = sum;
 
                 }
                 else if (optcodes[index] == 2)
                 {
-                    int product = optcodes[index + 1] * optcodes[index + 2];
+                    int product = optcodes[optcodes[index + 1]] * optcodes[optcodes[index + 2]];
                     // Change output position value
-                    optcodes[index + 3] = product;
+                    optcodes[optcodes[index + 3]] = product;
                 }
             }
+
+            return optcodes;
         }
 
         public static void Run(string filePath, Logger log)
@@ -63,9 +63,9 @@ namespace Day02
             int[] optcodeNums = Array.ConvertAll<string,int>(optcodes, int.Parse);
 
             Solution2 solution = new Solution2();
-            int processed = solution.NounAndVerbGenerator(optcodeNums);
+            solution.NounAndVerbGenerator(optcodeNums);
 
-            log.Information($"Answer is {processed}");
+            log.Information($"Answer is {solution.nounVerb}");
         }
     }
 }
