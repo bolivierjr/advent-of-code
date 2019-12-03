@@ -7,20 +7,37 @@ namespace Day02
 {
     public class Solution2: ISolution
     {
-        public int OptcodeProcessor(int[] optcodes)
+        public int NounAndVerbGenerator(int[] optcodes)
+        {
+            for (int noun = 0; noun < 100; noun++)
+            {
+                for (int verb = 0; verb < 100; verb++)
+                {
+                    optcodes[1] = noun;
+                    optcodes[2] = verb;
+
+                    bool processed = this.OptcodeProcessor(optcodes);
+
+                    if(processed)
+                    {
+                        return 1;
+                    }
+                }
+            }
+
+            return 0;
+        }
+
+        public bool OptcodeProcessor(int[] optcodes)
         {
             int operation = optcodes[0];
             int inputOne = optcodes[1];
             int inputTwo = optcodes[2];
             int output = optcodes[3];
 
-            for (int index = 0; index < optcodes.Length; index++)
+            for (int index = 0; index < optcodes.Length; index += 4)
             {
-                if (index % 4 != 0)
-                {
-                    continue;
-                }
-                else if (operation == 99)
+                if (operation == 99)
                 {
                     break;
                 }
@@ -38,6 +55,11 @@ namespace Day02
                     optcodes[output] = product;
                 }
 
+                if (optcodes[0] == 19690720)
+                {
+                    return true;
+                }
+
                 if (index + 4 >= optcodes.Length) break;
 
                 // Put the next four optcodes in place
@@ -47,9 +69,7 @@ namespace Day02
                 output = optcodes[index + 3];
             }
 
-            int result = optcodes[0];
-
-            return result;
+            return false;
         }
 
         public static void Run(string filePath, Logger log)
@@ -58,12 +78,8 @@ namespace Day02
             string[] optcodes = intcodeProgram.Split(",");
             int[] optcodeNums = Array.ConvertAll<string,int>(optcodes, int.Parse);
 
-            // 1202 program alarm state
-            optcodeNums[1] = 12;
-            optcodeNums[2] = 2;
-
-            Solution1 solution = new Solution1();
-            int processed = solution.OptcodeProcessor(optcodeNums);
+            Solution2 solution = new Solution2();
+            int processed = solution.NounAndVerbGenerator(optcodeNums);
 
             log.Information($"Answer is {processed}");
         }
