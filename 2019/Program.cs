@@ -30,7 +30,7 @@ namespace AdventOfCode2019
 
             try
             {
-                Type type = Type.GetType($"{day}.{solution}");
+                var type = Type.GetType($"{day}.{solution}");
                 type.GetMethod("Run").Invoke(null, new object[] {filePath, log});
 
                 stopwatch.Stop();
