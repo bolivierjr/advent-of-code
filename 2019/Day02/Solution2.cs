@@ -9,16 +9,18 @@ namespace Day02
     {
         public int NounAndVerbGenerator(int[] optcodes)
         {
+            int[] memory = (int[])optcodes.Clone();
+
             for (int noun = 0; noun < 100; noun++)
             {
                 for (int verb = 0; verb < 100; verb++)
                 {
-                    optcodes[1] = noun;
-                    optcodes[2] = verb;
+                    memory[1] = noun;
+                    memory[2] = verb;
 
-                    bool processed = this.OptcodeProcessor(optcodes);
+                    this.OptcodeProcessor(memory);
 
-                    if(processed)
+                    if(memory[0] == 19690720)
                     {
                         return 1;
                     }
@@ -28,48 +30,30 @@ namespace Day02
             return 0;
         }
 
-        public bool OptcodeProcessor(int[] optcodes)
+        public void OptcodeProcessor(int[] optcodes)
         {
-            int operation = optcodes[0];
-            int inputOne = optcodes[1];
-            int inputTwo = optcodes[2];
-            int output = optcodes[3];
 
             for (int index = 0; index < optcodes.Length; index += 4)
             {
-                if (operation == 99)
+                if (optcodes[index] == 99)
                 {
                     break;
                 }
-                else if (operation == 1)
+                
+                else if (optcodes[index] == 1)
                 {
-                    int sum = optcodes[inputOne] + optcodes[inputTwo];
+                    int sum = optcodes[index + 1] + optcodes[index + 2];
                     // Change output position value
-                    optcodes[output] = sum;
+                    optcodes[index + 3] = sum;
 
                 }
-                else if (operation == 2)
+                else if (optcodes[index] == 2)
                 {
-                    int product = optcodes[inputOne] * optcodes[inputTwo];
+                    int product = optcodes[index + 1] * optcodes[index + 2];
                     // Change output position value
-                    optcodes[output] = product;
+                    optcodes[index + 3] = product;
                 }
-
-                if (optcodes[0] == 19690720)
-                {
-                    return true;
-                }
-
-                if (index + 4 >= optcodes.Length) break;
-
-                // Put the next four optcodes in place
-                operation = optcodes[index];
-                inputOne = optcodes[index + 1];
-                inputTwo = optcodes[index + 2];
-                output = optcodes[index + 3];
             }
-
-            return false;
         }
 
         public static void Run(string filePath, Logger log)

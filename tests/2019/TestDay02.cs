@@ -19,7 +19,7 @@ namespace tests
         [Fact]
         public void TestSolutionTwo()
         {
-
+            Assert.Equal(1, 0);
         }
     }
 }
