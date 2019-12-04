@@ -41,14 +41,11 @@ namespace Day02
                 if (optcodes[index] == 1)
                 {
                     int sum = optcodes[optcodes[index + 1]] + optcodes[optcodes[index + 2]];
-                    // Change output position value
                     optcodes[optcodes[index + 3]] = sum;
-
                 }
                 else if (optcodes[index] == 2)
                 {
                     int product = optcodes[optcodes[index + 1]] * optcodes[optcodes[index + 2]];
-                    // Change output position value
                     optcodes[optcodes[index + 3]] = product;
                 }
             }

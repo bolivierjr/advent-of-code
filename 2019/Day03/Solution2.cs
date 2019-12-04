@@ -9,14 +9,14 @@ namespace Day03
     {
         public static void Run(string filePath, Logger log)
         {
-            var solution = new Solution2();
+            var solution2 = new Solution2();
 
             foreach(string line in File.ReadLines(filePath))
             {
                 
             }
 
-            log.Information($"Answer is: {}");
+            log.Information($"Answer is: {1}");
         }
     }
 }
