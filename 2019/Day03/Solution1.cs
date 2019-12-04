@@ -30,24 +30,16 @@ namespace Day03
             foreach(string wire in wirepath)
             {
                 var letter = wire.Substring(0, 1);
-                var number = wire.Substring(1);
+                var number = Int32.Parse(wire.Substring(1));
 
-                if (letter == "L")
-                    xCoord = Int32.Parse($"-{number}");
-                else if (letter == "R")
-                    xCoord = Int32.Parse(number);
+                if (letter == "L") xCoord -= number;
+                else if (letter == "R") xCoord += number;
+                else if (letter == "U") yCoord += number;
+                else if (letter == "D") yCoord -= number;
 
-                if (letter == "U")
-                {
-                    yCoord = Int32.Parse(number);
-                    coordinates.Add(new Point(xCoord, yCoord));
-                }
-                else if (letter == "D")
-                {
-                    yCoord = Int32.Parse($"-{number}");
-                    coordinates.Add(new Point(xCoord, yCoord));
-                }
+                coordinates.Add(new Point(xCoord, yCoord));
             }
+
             return coordinates;
         }
 
@@ -55,9 +47,9 @@ namespace Day03
         {
             var intersections = new List<Point>();
 
-            for (int indexOne = 0; indexOne < wireOne.Count; indexOne += 2)
+            for (int indexOne=0; indexOne<wireOne.Count; indexOne+=2)
             {
-                for (int indexTwo = 0; indexTwo < wireOne.Count; indexTwo += 2)
+                for (int indexTwo=0; indexTwo<wireOne.Count; indexTwo+=2)
                 {
                     Point A = wireOne[indexOne];
                     Point B = wireOne[indexOne + 1];
