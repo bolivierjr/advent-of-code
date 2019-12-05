@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using Interfaces;
 using Serilog.Core;
 
-// ** WIP ** 
 namespace Day03
 {
     public class Solution1 : ISolution
@@ -36,7 +35,7 @@ namespace Day03
 
         public HashSet<Tuple<int,int>> FindIntersections(
             List<Tuple<int,int>> wireOne, List<Tuple<int,int>> wireTwo)
-        {       
+        {
             var wireOneSet = new HashSet<Tuple<int,int>>(wireOne);
             var wireTwoSet = new HashSet<Tuple<int,int>>(wireTwo);
             var intersections = new HashSet<Tuple<int,int>>(wireTwoSet);
@@ -76,7 +75,7 @@ namespace Day03
             var wirePathTwo = sol.GetWireLayout(coordList[1]);
             var intersections = sol.FindIntersections(wirePathOne, wirePathTwo);
             var distance = sol.GetClosestDistance(intersections);
-            
+
             log.Information($"Distance is: {distance}");
         }
     }
