@@ -1,29 +1,43 @@
+using System;
 using System.Collections.Generic;
 
 namespace Utils
 {
     public class Counter
     {
-        private readonly string Message;
-
-        public Counter(string message)
+        public static Dictionary<string, int> CountChars(string message)
         {
-            Message = message;
-        }
+            var counted = new Dictionary<string, int>();
 
-        public Dictionary<char, int> CountChars()
-        {
-            Dictionary<char, int> counted = new Dictionary<char, int>();
-
-            foreach (char letter in Message)
+            foreach (char letter in message)
             {
-                if (counted.ContainsKey(letter))
+                var charToString = letter.ToString();
+                if (counted.ContainsKey(charToString))
                 {
-                    counted[letter]++;
+                    counted[charToString]++;
                 }
                 else
                 {
-                    counted[letter] = 1;
+                    counted[charToString] = 1;
+                }
+            }
+
+            return counted;
+        }
+
+        public static Dictionary<int, int> CountInt(int[] numbers)
+        {
+            var counted = new Dictionary<int, int>();
+
+            foreach (int num in numbers)
+            {
+                if (counted.ContainsKey(num))
+                {
+                    counted[num]++;
+                }
+                else
+                {
+                    counted[num] = 1;
                 }
             }
 
