@@ -26,9 +26,8 @@ namespace Day04
         {
             var rangeInt = Array.ConvertAll(range, int.Parse);
             var passwords = new List<int>();
-            for (int pass = rangeInt[0]; pass < rangeInt[1]; pass++)
+            for (int pass = rangeInt[0]; pass <= rangeInt[1]; pass++)
             {
-                // Console.WriteLine(pass);
                 var passToCharArray = pass.ToString().ToCharArray();
                 var passToIntArray = Array.ConvertAll(
                     passToCharArray, x => (int)Char.GetNumericValue(x));
@@ -43,11 +42,10 @@ namespace Day04
 
         new public static void Run(string filePath, Logger log)
         {
-            var input = "240298-784956";
-            var inputList = input.Split("-");
+            var input = "444555-444556".Split("-");
 
             var sol = new Solution2();
-            var passwords = sol.FindPasswords(inputList);
+            int passwords = sol.FindPasswords(input);
             log.Information($"Amount of passwords is: {passwords}");
         }
     }
