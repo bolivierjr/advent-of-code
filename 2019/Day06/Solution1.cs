@@ -21,12 +21,33 @@ namespace Day06
             this.name = name;
         }
 
-        // Method traverses through the parents and
-        // uses recursion to count the number of parent
+        // Traverses through the parent nodes and
+        // uses DFS to count the number of parent
         // nodes linked together.
         public int CountOrbits()
         {
             return 1 + parent?.CountOrbits() ?? 0;
+        }
+
+        // Traverses through the parent nodes using
+        // BFS with a queue and returns a hashset of
+        // the nodes.
+        public HashSet<Planet> PathToCom()
+        {
+            var distance = new HashSet<Planet>();
+            var queue = new Queue<Planet>();
+            queue.Enqueue(this);
+            while (queue.Count > 0)
+            {
+                var currentNode = queue.Dequeue();
+                distance.Add(currentNode);
+                if (currentNode.parent != null)
+                {
+                    queue.Enqueue(currentNode.parent);
+                }
+            }
+
+            return distance;
         }
     }
 
@@ -106,7 +127,7 @@ namespace Day06
             var orbits = sol.GenerateInput(filePath);
             var orbitalSystem = sol.GenerateOrbitalMap(orbits);
             var total = sol.TotalOrbits(orbitalSystem);
-            log.Information($"Total fuel required: {total}");
+            log.Information($"Total is: {total}");
         }
     }
 }
