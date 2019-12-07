@@ -2,19 +2,19 @@ import os
 from typing import Union, List, Tuple, Dict, Set
 from queue import Queue
 
-## **WIP**
+
 class Planet:
     def __init__(self, name: str):
         self.name = name
         self.parent: Union[Planet, None] = None
 
     def count_orbits(self) -> int:
-        if not self.parent:
+        if self.parent is None:
             return 0
         return 1 + self.parent.count_orbits()
 
     def path_to_com(self) -> Set[object]:
-        distance: Set[Planet] = {}
+        distance = set()
         queue = Queue()
         queue.put(self)
 
@@ -34,13 +34,13 @@ def make_system(orbits: List[Tuple[str, str]]) -> Dict[str, Planet]:
         parent_node: Planet
         child_node: Planet
 
-        if parent in orbital_system.keys():
+        if parent in orbital_system:
             parent_node = orbital_system[parent]
         else:
             parent_node = Planet(parent)
             orbital_system[parent] = parent_node
 
-        if child in orbital_system.keys():
+        if child in orbital_system:
             child_node = orbital_system[child]
             child_node.parent = parent_node
         else:
@@ -53,7 +53,17 @@ def make_system(orbits: List[Tuple[str, str]]) -> Dict[str, Planet]:
 
 def total_orbits(orbital_system: Dict[str, Planet]) -> int:
     totals = [planet.count_orbits() for planet in orbital_system.values()]
-    return len(totals)
+    return sum(totals)
+
+
+def get_distance(distance1: Set[Planet], distance2: Set[Planet]) -> int:
+    common_paths = distance1 & distance2
+    sorted_paths = list(sorted(common_paths, key=lambda x: x.path_to_com()))
+    last_common_path = sorted_paths[-1].path_to_com()
+    distance_last_common1 = len(distance1) - len(last_common_path)
+    distance_last_common2 = len(distance2) - len(last_common_path)
+
+    return distance_last_common1 + distance_last_common2 - 2
 
 
 if __name__ == "__main__":
@@ -66,4 +76,10 @@ if __name__ == "__main__":
     orbits = [tuple(row.split(")")) for row in data]
     orbital_system = make_system(orbits)
     total = total_orbits(orbital_system)
+
+    you_route: Set[Planet] = orbital_system["YOU"].path_to_com()
+    santa_route: Set[Planet] = orbital_system["SAN"].path_to_com()
+    distance = get_distance(you_route, santa_route)
+
+    print(f"Path from you to santa is: {distance}")
     print(f"Total orbits is: {total}")

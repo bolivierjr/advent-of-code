@@ -37,10 +37,8 @@ namespace Day06
             var sol = new Solution2();
             var orbits = sol.GenerateInput(filePath);
             var orbitalSystem = sol.GenerateOrbitalMap(orbits);
-            var you = orbitalSystem["YOU"];
-            var santa = orbitalSystem["SAN"];
-            var youRoute = you.PathToCom();
-            var santaRoute = santa.PathToCom();
+            var youRoute = orbitalSystem["YOU"].PathToCom();
+            var santaRoute = orbitalSystem["SAN"].PathToCom();
             var pathToSanta = sol.GetDistance(youRoute, santaRoute);
 
             log.Information($"Total is: {pathToSanta}");
