@@ -94,10 +94,10 @@ namespace Day06
 
         // Find the total number of orbits by 
         // traversing through the Planet map.
-        public int TotalOrbits(Dictionary<string, Planet> orbits)
+        public int TotalOrbits(Dictionary<string, Planet> orbitalSystem)
         {
             var totals = new List<int>();
-            foreach (var planet in orbits.Values)
+            foreach (var planet in orbitalSystem.Values)
             {
                 totals.Add(planet.CountOrbits());
             }
