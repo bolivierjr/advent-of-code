@@ -20,8 +20,10 @@ namespace Day06
         public int GetDistance(
             HashSet<Planet> distance1, HashSet<Planet> distance2)
         {
-            var commonPaths = new HashSet<Planet>(distance1);
-            commonPaths.IntersectWith(distance2);
+            // Finds the intersecting planets between two paths with Linq.
+            var commonPaths = from distance in distance1.Intersect(distance2)
+                              select distance;
+
             var sortCommonPaths = commonPaths.OrderBy(x => x.PathToCom().Count);
             var lastCommonPath = sortCommonPaths.Last().PathToCom();
             int distanceToLastPath1 = distance1.Count - lastCommonPath.Count;

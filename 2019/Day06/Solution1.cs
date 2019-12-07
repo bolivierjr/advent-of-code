@@ -79,7 +79,7 @@ namespace Day06
                 if (orbitalSystem.ContainsKey(child))
                 {
                     childNode = orbitalSystem[child];
-                    if (childNode.parent == null) childNode.parent = parentNode;
+                    childNode.parent = parentNode;
                 }
                 else
                 {
