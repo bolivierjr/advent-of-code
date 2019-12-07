@@ -8,9 +8,9 @@ using System.Linq;
 
 namespace Day06
 {
-    // Planet class that stores the name
-    // and parent node that is considered
-    // the planet it is orbiting around.
+    // Planet tree that stores it's name
+    // and parent node of the planet it is
+    // considered to be orbiting around.
     public class Planet
     {
         public string name;
