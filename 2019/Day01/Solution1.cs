@@ -9,7 +9,8 @@ namespace Day01
     {
         private int totalFuel = 0;
 
-        public int TotalFuel {
+        public int TotalFuel
+        {
             get { return totalFuel; }
         }
 
@@ -27,7 +28,7 @@ namespace Day01
         {
             Solution1 solution = new Solution1();
 
-            foreach(string line in File.ReadLines(filePath))
+            foreach (string line in File.ReadLines(filePath))
             {
                 int mass = Int32.Parse(line);
                 solution.RequiredFuel(mass);

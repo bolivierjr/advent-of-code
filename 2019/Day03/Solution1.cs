@@ -9,13 +9,13 @@ namespace Day03
 {
     public class Solution1 : ISolution
     {
-        public List<Tuple<int,int>> GetWireLayout(string[] wirepath)
+        public List<Tuple<int, int>> GetWireLayout(string[] wirepath)
         {
             int xCoord = 0;
             int yCoord = 0;
-            var coordinates = new List<Tuple<int,int>>();
+            var coordinates = new List<Tuple<int, int>>();
 
-            foreach(string wire in wirepath)
+            foreach (string wire in wirepath)
             {
                 var letter = wire.Substring(0, 1);
                 var number = Int32.Parse(wire.Substring(1));
@@ -33,23 +33,23 @@ namespace Day03
             return coordinates;
         }
 
-        public HashSet<Tuple<int,int>> FindIntersections(
-            List<Tuple<int,int>> wireOne, List<Tuple<int,int>> wireTwo)
+        public HashSet<Tuple<int, int>> FindIntersections(
+            List<Tuple<int, int>> wireOne, List<Tuple<int, int>> wireTwo)
         {
-            var wireOneSet = new HashSet<Tuple<int,int>>(wireOne);
-            var wireTwoSet = new HashSet<Tuple<int,int>>(wireTwo);
-            var intersections = new HashSet<Tuple<int,int>>(wireTwoSet);
+            var wireOneSet = new HashSet<Tuple<int, int>>(wireOne);
+            var wireTwoSet = new HashSet<Tuple<int, int>>(wireTwo);
+            var intersections = new HashSet<Tuple<int, int>>(wireTwoSet);
             intersections.IntersectWith(wireOneSet);
 
             return intersections;
         }
 
-        public int GetClosestDistance(HashSet<Tuple<int,int>> intersections)
+        public int GetClosestDistance(HashSet<Tuple<int, int>> intersections)
         {
-            var origin = Tuple.Create(0,0);
+            var origin = Tuple.Create(0, 0);
             var distances = new List<int>();
 
-            foreach (Tuple<int,int> point in intersections)
+            foreach (Tuple<int, int> point in intersections)
             {
                 var a = Math.Abs(origin.Item1 - point.Item1);
                 var b = Math.Abs(origin.Item2 - point.Item2);
