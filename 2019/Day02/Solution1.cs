@@ -9,13 +9,14 @@ namespace Day02
     {
         public int OptcodeProcessor(int[] optcodes)
         {
-            int operation = optcodes[0];
-            int inputOne = optcodes[1];
-            int inputTwo = optcodes[2];
-            int output = optcodes[3];
-
-            for (int index = 0; index < optcodes.Length; index+=4)
+            for (int index = 0; index < optcodes.Length; index += 4)
             {
+                // Put the next opcodes in place.
+                int operation = optcodes[index];
+                int inputOne = optcodes[index + 1];
+                int inputTwo = optcodes[index + 2];
+                int output = optcodes[index + 3];
+
                 if (operation == 99)
                 {
                     break;
@@ -33,14 +34,6 @@ namespace Day02
                     // Change output position value
                     optcodes[output] = product;
                 }
-
-                if (index + 4 >= optcodes.Length) break;
-
-                // Put the next four optcodes in place
-                operation = optcodes[index];
-                inputOne = optcodes[index + 1];
-                inputTwo = optcodes[index + 2];
-                output = optcodes[index + 3];
             }
 
             int result = optcodes[0];
@@ -52,7 +45,7 @@ namespace Day02
         {
             string intcodeProgram = File.ReadAllText(filePath);
             string[] optcodes = intcodeProgram.Split(",");
-            int[] optcodeNums = Array.ConvertAll<string,int>(optcodes, int.Parse);
+            int[] optcodeNums = Array.ConvertAll<string, int>(optcodes, int.Parse);
 
             // 1202 program alarm state
             optcodeNums[1] = 12;
