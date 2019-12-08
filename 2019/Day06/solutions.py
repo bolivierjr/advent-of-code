@@ -1,6 +1,6 @@
 import os
-from typing import Union, List, Tuple, Dict, Set
 from queue import Queue
+from typing import Union, List, Tuple, Dict, Set
 
 
 class Planet:
