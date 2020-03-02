@@ -34,12 +34,15 @@ defmodule Day01 do
   end
 
   def run do
+    require Logger
+
     try do
       input = get_input()
-      IO.puts("The solution to part 1 is: #{part_1(input)}")
-      IO.puts("The solution to part 2 is: #{part_2(input)}")
+      Logger.info("The solution to part 1 is: #{part_1(input)}")
+      Logger.info("The solution to part 2 is: #{part_2(input)}")
     catch
-      input -> exit("Error: #{input}")
+      input ->
+        Logger.error("Error: #{input}")
     end
   end
 end

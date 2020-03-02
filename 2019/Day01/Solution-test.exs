@@ -1,4 +1,4 @@
-ExUnit.start
+ExUnit.start()
 
 defmodule Day01Test do
   use ExUnit.Case
