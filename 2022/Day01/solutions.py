@@ -42,16 +42,16 @@ if __name__ == "__main__":
     with open(filename, "r", encoding="utf-8") as fp:
         data: str = fp.read()
 
-    start_time = time.time()
+    start_time = time.perf_counter()
     elf_number, total_calories = find_solution_one(data)
-    end_time = time.time()
+    end_time = time.perf_counter()
 
     print(f"Part 1 Solution: Total calories are {total_calories} from elf {elf_number}.")
     print(f"Part 1 total time of execution: {(end_time - start_time) * 1000} ms")
 
-    start_time = time.time()
+    start_time = time.perf_counter()
     sum_of_total_calories = find_solution_two(data)
-    end_time = time.time()
+    end_time = time.perf_counter()
 
     print(f"Part 2 Solution: Total calories from the top three elves are {sum_of_total_calories}.")
     print(f"Part 2 total time of execution: {(end_time - start_time) * 1000} ms")
