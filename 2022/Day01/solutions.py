@@ -47,11 +47,11 @@ if __name__ == "__main__":
     end_time = time.time()
 
     print(f"Part 1 Solution: Total calories are {total_calories} from elf {elf_number}.")
-    print(f"Part 1 total time of execution: {end_time - start_time} seconds")
+    print(f"Part 1 total time of execution: {(end_time - start_time) * 1000} ms")
 
     start_time = time.time()
     sum_of_total_calories = find_solution_two(data)
     end_time = time.time()
 
     print(f"Part 2 Solution: Total calories from the top three elves are {sum_of_total_calories}.")
-    print(f"Part 2 total time of execution: {end_time - start_time} seconds")
+    print(f"Part 2 total time of execution: {(end_time - start_time) * 1000} ms")
