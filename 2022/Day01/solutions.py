@@ -25,11 +25,12 @@ def find_solution_two(data: str) -> int:
 
 
 def format_data_by_total_calories_per_elf(data: str) -> Dict[int, int]:
-    # This ugly dictionary comprehension will format it like { 1: 10000, 2: 24000 }
-    total_calories_per_elf = {
-        elf + 1: sum(map(lambda calories: int(calories), food.split("\n")))
-        for (elf, food) in enumerate(data.split("\n\n"))
-    }
+    total_calories_per_elf: Dict[int, int] = {}
+
+    for (elf, food) in enumerate(data.split("\n\n")):
+        elf_number = elf + 1
+        total_calories = sum(map(lambda calories: int(calories), food.split("\n")))
+        total_calories_per_elf[elf_number] = total_calories
 
     return total_calories_per_elf
 
