@@ -30,6 +30,7 @@ class Points(Enum):
 def find_solution_one(data: str):
     rounds = process_data(data)
     _, my_score = get_score(rounds)
+
     return my_score
 
 
@@ -103,4 +104,5 @@ if __name__ == "__main__":
     my_score = find_solution_one(data)
     end_time = time.perf_counter()
 
-    print(my_score)
+    print(f"My score is {my_score}.")
+    print(f"Part 1 total time of execution: {(end_time - start_time) * 1000} ms")
