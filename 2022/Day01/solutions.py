@@ -14,7 +14,7 @@ def find_solution_one(data: str) -> Tuple[int, int]:
     return elf_with_most_calories, total_calories
 
 
-def find_solution_two(data: str):
+def find_solution_two(data: str) -> int:
     food_per_elf = format_data_by_food_per_elf(data)
     sorted_total_calories_list = sorted(food_per_elf.values(), reverse=True)
     # top 3 calories from the elves with the most food in desc order
