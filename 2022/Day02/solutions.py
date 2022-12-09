@@ -27,7 +27,7 @@ class Points(Enum):
     DRAW = 3
 
 
-def find_solution_one(data: str):
+def find_solution_one(data: str) -> int:
     rounds = process_data(data)
     _, my_score = get_score(rounds)
 
