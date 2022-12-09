@@ -48,7 +48,12 @@ def find_solution_two(data: str) -> int:
     return my_score
 
 
-def get_my_score(rounds: List[Tuple[str, str]]) -> Tuple[int, int]:
+def process_data(data: str) -> List[Tuple[str, str]]:
+    # formatted to [('A', 'Y'), ('B', 'X'), ('C', 'Z')]
+    return [tuple(elements.split(" ")) for elements in data.split("\n")]
+
+
+def get_my_score(rounds: List[Tuple[str, str]]) -> int:
     my_score = 0
 
     for opponent_move, my_move in rounds:
@@ -89,7 +94,7 @@ def get_my_score(rounds: List[Tuple[str, str]]) -> Tuple[int, int]:
     return my_score
 
 
-def get_my_cheater_score(rounds: List[Tuple[str, str]]):
+def get_my_cheater_score(rounds: List[Tuple[str, str]]) -> int:
     my_score = 0
 
     for opponent_move, cheat_move in rounds:
@@ -128,11 +133,6 @@ def get_my_cheater_score(rounds: List[Tuple[str, str]]):
                         my_score += Points.ROCK.value + Points.WIN.value
 
     return my_score
-
-
-def process_data(data: str) -> List[Tuple[str, str]]:
-    # formatted to [('A', 'Y'), ('B', 'X'), ('C', 'Z')]
-    return [tuple(elements.split(" ")) for elements in data.split("\n")]
 
 
 if __name__ == "__main__":
