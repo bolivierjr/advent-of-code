@@ -14,4 +14,4 @@ def test_find_solution_one():
 
 
 def test_find_solution_two():
-    assert 12 == test_find_solution_two()
+    assert 12 == test_find_solution_two(test_data)
